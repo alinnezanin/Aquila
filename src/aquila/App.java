@@ -1,0 +1,128 @@
+package aquila;
+
+import java.io.FileInputStream;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Scanner;
+import aquila.comandos.*;
+import aquila.estruturaDados.FSM;
+import aquila.estruturaDados.State;
+import aquila.estruturaDados.Transition;
+import aquila.estruturaDados.Tupla;
+import gherkin.AstBuilder;
+import gherkin.Parser;
+import gherkin.ast.GherkinDocument;
+import gherkin.pickles.Compiler;
+import gherkin.pickles.Pickle;
+import gherkin.pickles.PickleStep;
+
+
+public class App {
+
+	public static void main(String[] args) {
+		
+		//List<List<String>> sequencias = new ArrayList<List<String>>();
+		String arq = "teste1.feature";
+		
+		
+		String a = " dsasda d sasd aclick[aaa]";
+		
+		System.err.println(a.matches(".*click\\[.*\\]$"));
+		
+//		
+//		Pattern pattern = Pattern.compile("\\{(.*?)\\}");
+//		Matcher matcher =  pattern.matcher(a);
+//		System.err.println(matcher.find());
+//		
+//		String nomeFSM = matcher.group(1);
+//		
+//		
+//		System.err.println(nomeFSM);
+
+		
+		
+		Scanner in = null;
+		
+		try
+		{
+			in = new Scanner(new FileInputStream(arq), "UTF-8");
+		}
+		catch(Exception e)
+		{
+			System.err.println("Erro na leitura do arquivo: " + arq);
+		}
+		StringBuilder sb = new StringBuilder();
+		while(in.hasNextLine())
+		{
+			sb.append(in.nextLine() + "\n");
+		}
+		
+
+		Parser<GherkinDocument> parser = new Parser<GherkinDocument>(new AstBuilder());
+		GherkinDocument gd = parser.parse(sb.toString());
+		List<Pickle> pickles = new Compiler().compile(gd);
+		
+		
+		
+		
+		List<ComandosAquila> listaComandos = new LinkedList<ComandosAquila>();
+		listaComandos.add(new UseValidData());
+		listaComandos.add(new Extender());
+		listaComandos.add(new Driver());
+		listaComandos.add(new Click());
+		listaComandos.add(new Link());
+		listaComandos.add(new Put());
+		
+		
+		for(Pickle p : pickles)
+		{
+			int contadorEstados = 0; //vai ser utilizado para os nomes dos estados
+			State inicial = new State(Integer.toString(contadorEstados));
+			contadorEstados++;
+			FSM fsm = new FSM();
+			fsm.addState(inicial);
+			fsm.addFinalState(inicial);
+			fsm.setStart(inicial);
+			
+			State ultimoEstado = fsm.getStart();
+			for(PickleStep ps: p.getSteps())
+			{
+				boolean pickleT = false;				
+				for(ComandosAquila ca : listaComandos)
+				{
+					if(ca.verificar(ps))
+					{
+						pickleT = true;
+						Tupla<FSM, State> temp = ca.processar(ps); // Gera uma FSM separada
+						
+						
+						Tupla<FSM, State> tupla = FSM.unirFSM(fsm, temp.getPri(), ultimoEstado, temp.getSeg());
+						fsm = tupla.getPri();
+						
+						ultimoEstado = tupla.getSeg();
+						
+						
+						contadorEstados = Integer.parseInt(ultimoEstado.getName());
+						contadorEstados++;
+						break;
+					}	
+				}
+				if(!pickleT) 
+				{
+					State novo = new State(Integer.toString(contadorEstados));
+					contadorEstados++;
+					fsm.addState(novo);
+					fsm.addFinalState(novo);
+					Transition trans = new Transition(ultimoEstado, novo, ps.getText());
+					fsm.addTransition(trans);
+					ultimoEstado = novo;
+				}
+			}
+
+			fsm = FSM.removeNonDeterminism(fsm);
+			Contexto.getContext().addFSM(p.getName(), new Tupla<FSM, State>(fsm, ultimoEstado));	
+			System.out.println(fsm);
+		}
+		
+	}
+}
