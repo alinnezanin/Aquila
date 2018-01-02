@@ -3,13 +3,14 @@ package aquila.comandos;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import aquila.Contexto;
 import aquila.estruturaDados.FSM;
 import aquila.estruturaDados.State;
 import aquila.estruturaDados.Transition;
 import aquila.estruturaDados.Tupla;
 import gherkin.pickles.PickleStep;
 
-public class selectData implements ComandosAquila {
+public class SelectData implements ComandosAquila {
 
 	@Override
 	public boolean verificar(PickleStep ps) {
@@ -39,7 +40,8 @@ public class selectData implements ComandosAquila {
 		resposta.addFinalState(inicio);
 		resposta.setStart(inicio);
 		
-		Transition tran = new Transition(inicio, fim, campo);
+		// Precisaria do valor tbm, mas não tem onde pegar ele
+		Transition tran = new Transition(inicio, fim, Contexto.getContext().getLinguagem().converter(this, campo));
 		resposta.addTransition(tran);
 		
 		return new Tupla<FSM, State>(resposta, fim);

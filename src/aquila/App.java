@@ -62,8 +62,7 @@ public class App {
 		GherkinDocument gd = parser.parse(sb.toString());
 		List<Pickle> pickles = new Compiler().compile(gd);
 		
-		
-		
+		Contexto.getContext().setLinguagem(new Selenium());
 		
 		List<ComandosAquila> listaComandos = new LinkedList<ComandosAquila>();
 		listaComandos.add(new UseValidData());
@@ -72,6 +71,14 @@ public class App {
 		listaComandos.add(new Click());
 		listaComandos.add(new Link());
 		listaComandos.add(new Put());
+		listaComandos.add(new Disable());
+		listaComandos.add(new DontFillOut());
+		listaComandos.add(new Enable());
+		listaComandos.add(new Open());
+		listaComandos.add(new SelectData());
+		listaComandos.add(new Showed());
+		
+		
 		
 		
 		for(Pickle p : pickles)

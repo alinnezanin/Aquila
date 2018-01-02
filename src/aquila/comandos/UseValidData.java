@@ -2,6 +2,10 @@ package aquila.comandos;
 
 
 
+import java.util.LinkedList;
+import java.util.List;
+
+import aquila.Contexto;
 import aquila.estruturaDados.FSM;
 import aquila.estruturaDados.State;
 import aquila.estruturaDados.Transition;
@@ -52,11 +56,18 @@ public class UseValidData implements ComandosAquila {
 		boolean cabecalho = true;
 		State ultimoEstado = inicial;
 		State finalTabela = null;
+		
+		List<String> campos = new LinkedList<String>();
 		for(PickleRow tr : table.getRows())
 		{
 			ultimoEstado = inicial;
 			if(cabecalho)
 			{
+				for(int i = 0; i < tr.getCells().size(); i++)
+				{
+					PickleCell pc = tr.getCells().get(i);
+					campos.add(pc.getValue());
+				}
 				cabecalho = false;
 			}
 			else
@@ -80,7 +91,8 @@ public class UseValidData implements ComandosAquila {
 						contadorEstados++;
 						fsm.addState(novo);
 						fsm.addFinalState(novo);
-						Transition trans = new Transition(ultimoEstado, novo, pc.getValue());
+						String input = Contexto.getContext().getLinguagem().converter(this, campos.get(i), pc.getValue());
+						Transition trans = new Transition(ultimoEstado, novo, input);
 						fsm.addTransition(trans);
 						ultimoEstado = novo;
 					}
@@ -90,7 +102,8 @@ public class UseValidData implements ComandosAquila {
 						contadorEstados++;
 						fsm.addState(novo);
 						fsm.addFinalState(novo);
-						Transition trans = new Transition(ultimoEstado, novo, pc.getValue());
+						String input = Contexto.getContext().getLinguagem().converter(this, campos.get(i), pc.getValue());
+						Transition trans = new Transition(ultimoEstado, novo, input);
 						fsm.addTransition(trans);
 						ultimoEstado = novo;
 					}

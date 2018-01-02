@@ -3,6 +3,7 @@ package aquila.comandos;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import aquila.Contexto;
 import aquila.estruturaDados.FSM;
 import aquila.estruturaDados.State;
 import aquila.estruturaDados.Transition;
@@ -25,7 +26,7 @@ public class Click implements ComandosAquila {
 		{
 			System.err.println("Comando incorreto: " + ps.getText());
 		}
-		input = m.group(1);
+		input = Contexto.getContext().getLinguagem().converter(this, m.group(1));
 		
 		State inicio = new State("0");
 		State fim = new State("1");

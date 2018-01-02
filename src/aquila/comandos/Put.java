@@ -1,5 +1,9 @@
 package aquila.comandos;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import aquila.Contexto;
 import aquila.estruturaDados.FSM;
 import aquila.estruturaDados.State;
 import aquila.estruturaDados.Transition;
@@ -19,6 +23,17 @@ public class Put implements ComandosAquila {
 
 	@Override
 	public Tupla<FSM, State> processar(PickleStep ps) {
+		
+		Pattern p = Pattern.compile(".*put\\[.*\\]$");
+		Matcher m = p.matcher(ps.getText());
+		String campo  = "";
+		
+		if(!m.find())
+		{
+			System.err.println("Erro comando: " + ps.getText());
+		}
+		campo = m.group(1);
+		
 		Argument arg = null;
 		for(Argument a : ps.getArgument())
 		{
@@ -58,15 +73,18 @@ public class Put implements ComandosAquila {
 			{					
 					PickleCell pc = tr.getCells().get(0);
 
+					// Na verdade não precisa criar varios estados vazios trans2, basta criar varias transcições para o mesmo estado
+					//
+					
 					State novo = new State(Integer.toString(contadorEstados));
 					contadorEstados++;
 					fsm.addState(novo);
 					fsm.addFinalState(novo);
-					Transition trans = new Transition(ultimoEstado, novo, pc.getValue());
+					Transition trans = new Transition(ultimoEstado, novo, Contexto.getContext().getLinguagem().converter(this, campo, pc.getValue()));
 					fsm.addTransition(trans);
 					ultimoEstado = novo;
 					
-					Transition trans2 = new Transition(novo, finalTabela, pc.getValue());
+					Transition trans2 = new Transition(novo, finalTabela, "");
 					fsm.addTransition(trans2);
 					
 			}

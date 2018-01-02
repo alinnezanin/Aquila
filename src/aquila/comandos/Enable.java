@@ -1,5 +1,6 @@
 package aquila.comandos;
 
+import aquila.Contexto;
 import aquila.estruturaDados.FSM;
 import aquila.estruturaDados.State;
 import aquila.estruturaDados.Transition;
@@ -25,7 +26,7 @@ public class Enable implements ComandosAquila {
 		resposta.addFinalState(inicio);
 		resposta.setStart(inicio);
 		
-		Transition tran = new Transition(inicio, fim, "enable");
+		Transition tran = new Transition(inicio, fim, Contexto.getContext().getLinguagem().converter(this, ""));
 		resposta.addTransition(tran);
 		
 		return new Tupla<FSM, State>(resposta, fim);
