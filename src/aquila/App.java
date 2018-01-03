@@ -4,6 +4,8 @@ import java.io.FileInputStream;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
+
+import aquila.algoritmos.BuscaProfundidade;
 import aquila.comandos.*;
 import aquila.estruturaDados.FSM;
 import aquila.estruturaDados.State;
@@ -21,25 +23,8 @@ public class App {
 
 	public static void main(String[] args) {
 		
-		//List<List<String>> sequencias = new ArrayList<List<String>>();
-		String arq = "teste1.feature";
-		
-		
-		String a = " dsasda d sasd aclick[aaa]";
-		
-		System.err.println(a.matches(".*click\\[.*\\]$"));
-		
-//		
-//		Pattern pattern = Pattern.compile("\\{(.*?)\\}");
-//		Matcher matcher =  pattern.matcher(a);
-//		System.err.println(matcher.find());
-//		
-//		String nomeFSM = matcher.group(1);
-//		
-//		
-//		System.err.println(nomeFSM);
-
-		
+		String arq = "cenario.txt";
+			
 		
 		Scanner in = null;
 		
@@ -63,6 +48,7 @@ public class App {
 		List<Pickle> pickles = new Compiler().compile(gd);
 		
 		Contexto.getContext().setLinguagem(new Selenium());
+		Contexto.getContext().setCobertura(new BuscaProfundidade());
 		
 		List<ComandosAquila> listaComandos = new LinkedList<ComandosAquila>();
 		listaComandos.add(new UseValidData());
@@ -78,9 +64,7 @@ public class App {
 		listaComandos.add(new SelectData());
 		listaComandos.add(new Showed());
 		
-		
-		
-		
+				
 		for(Pickle p : pickles)
 		{
 			int contadorEstados = 0; //vai ser utilizado para os nomes dos estados
@@ -129,6 +113,19 @@ public class App {
 			fsm = FSM.removeNonDeterminism(fsm);
 			Contexto.getContext().addFSM(p.getName(), new Tupla<FSM, State>(fsm, ultimoEstado));	
 			System.out.println(fsm);
+			
+			List<List<String>> sequencias = Contexto.getContext().getCobertura().gerarSequencias(fsm);
+			
+			for(List<String> ls : sequencias)
+			{
+				System.out.println("Sequencia");
+				for(String s : ls)
+				{
+					System.out.println(s);
+				}
+				System.out.println("\n\n\n");
+			}
+						
 		}
 		
 	}

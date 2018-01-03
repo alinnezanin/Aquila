@@ -12,8 +12,6 @@ public class Selenium implements Linguagem {
 				+ "click.click();\n", valor);
 		if(ca instanceof DontFillOut)return String.format("WebElement field= driver.findElement(By.name(\"%s\"));\n"
 				+ "field.sendKey(“”);\n", valor);
-		if(ca instanceof SelectData)return String.format("Select dropdown = new Select(driver.findElement(By.name(\"%s\")));\n"
-				+ "dropdown.selectByVisibleText(String text);\n", valor);
 		if(ca instanceof Enable)return "WebElement d = driver.findElement(By.name(\"firstname\"));\nboolean enable = d.isEnabled();\n"
 				+ "	assertEquals(true, enable);\n";
 		if(ca instanceof Disable)return "WebElement d = driver.findElement(By.name(\"firstname\"));\nboolean enable = d.isEnabled();\n"
@@ -29,6 +27,8 @@ public class Selenium implements Linguagem {
 				+ "field.sendKey(\"%s\");\n", campo, valor);
 		if(ca instanceof UseValidData)return String.format("WebElement field= driver.findElement(By.name(\"%s\"));\n"
 				+ "field.sendKey(\"%s\");\n", campo, valor);
+		if(ca instanceof SelectData)return String.format("Select dropdown = new Select(driver.findElement(By.name(\"%s\")));\n"
+				+ "dropdown.selectByVisibleText(\"%s\");\n", campo, valor);
 		return null;
 	}
 }

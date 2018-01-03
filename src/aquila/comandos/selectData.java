@@ -8,7 +8,11 @@ import aquila.estruturaDados.FSM;
 import aquila.estruturaDados.State;
 import aquila.estruturaDados.Transition;
 import aquila.estruturaDados.Tupla;
+import gherkin.pickles.Argument;
+import gherkin.pickles.PickleCell;
+import gherkin.pickles.PickleRow;
 import gherkin.pickles.PickleStep;
+import gherkin.pickles.PickleTable;
 
 public class SelectData implements ComandosAquila {
 
@@ -23,6 +27,15 @@ public class SelectData implements ComandosAquila {
 		Pattern p = Pattern.compile(".*select-data\\[(.*)\\]$");
 		Matcher m = p.matcher(ps.getText());
 		String campo  = "";
+		
+		Argument arg = null;
+		for(Argument a : ps.getArgument())
+		{
+			if(a instanceof PickleTable)
+			{
+				arg = a;
+			}
+		}
 		
 		if(!m.find())
 		{
@@ -40,10 +53,17 @@ public class SelectData implements ComandosAquila {
 		resposta.addFinalState(inicio);
 		resposta.setStart(inicio);
 		
-		// Precisaria do valor tbm, mas não tem onde pegar ele
-		Transition tran = new Transition(inicio, fim, Contexto.getContext().getLinguagem().converter(this, campo));
-		resposta.addTransition(tran);
-		
+		PickleTable table = (PickleTable) arg;
+
+		for(PickleRow tr : table.getRows())
+		{
+			PickleCell pc = tr.getCells().get(0);
+
+			Transition trans = new Transition(inicio, fim, Contexto.getContext().getLinguagem().converter(this, campo, pc.getValue()));
+			resposta.addTransition(trans);		
+			
+		}
+				
 		return new Tupla<FSM, State>(resposta, fim);
 	}
 

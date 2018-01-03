@@ -1,0 +1,15 @@
+Feature: Teste toolsQA
+
+Background:
+   
+
+Scenario: happy path
+    Given a pagina <http://toolsqa.com/automation-practice-form/>
+    When I use-valid-data
+    |firsName| lastName |
+    |Aline| Zanin|
+    |Aline2| Zanin2|
+    And i click[button]
+    Then showed["save"] message
+     
+

@@ -2,6 +2,7 @@ package aquila;
 import java.util.HashMap;
 import java.util.Map;
 
+import aquila.algoritmos.Cobertura;
 import aquila.comandos.Linguagem;
 import aquila.estruturaDados.FSM;
 import aquila.estruturaDados.State;
@@ -10,7 +11,8 @@ import aquila.estruturaDados.Tupla;
 public class Contexto {
 	
 	private static Contexto instance = null;
-	private  Linguagem linguagem = null;
+	private Linguagem linguagem = null;
+	private Cobertura cobertura = null;
 	
 	Map<String, Tupla<FSM, State>> contexto;
 	
@@ -41,5 +43,13 @@ public class Contexto {
 
 	public void setLinguagem(Linguagem linguagem) {
 		this.linguagem = linguagem;
+	}
+
+	public Cobertura getCobertura() {
+		return cobertura;
+	}
+
+	public void setCobertura(Cobertura cobertura) {
+		this.cobertura = cobertura;
 	}
 }

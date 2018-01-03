@@ -45,10 +45,10 @@ public class Put implements ComandosAquila {
 		
 		int contadorEstados = 0; //vai ser utilizado para os nomes dos estados
 		State inicial = new State(Integer.toString(contadorEstados));
-		contadorEstados++;
+
 		
 		State finalTabela = new State(Integer.toString(contadorEstados));
-		contadorEstados++;
+
 		
 		FSM fsm = new FSM();
 		fsm.addState(inicial);
@@ -60,34 +60,14 @@ public class Put implements ComandosAquila {
 		
 		
 		PickleTable table = (PickleTable) arg;
-		boolean cabecalho = true;
-		State ultimoEstado = inicial;
+
 		for(PickleRow tr : table.getRows())
 		{
-			ultimoEstado = inicial;
-			if(cabecalho)
-			{
-				cabecalho = false;
-			}
-			else
-			{					
-					PickleCell pc = tr.getCells().get(0);
 
-					// Na verdade não precisa criar varios estados vazios trans2, basta criar varias transcições para o mesmo estado
-					//
-					
-					State novo = new State(Integer.toString(contadorEstados));
-					contadorEstados++;
-					fsm.addState(novo);
-					fsm.addFinalState(novo);
-					Transition trans = new Transition(ultimoEstado, novo, Contexto.getContext().getLinguagem().converter(this, campo, pc.getValue()));
-					fsm.addTransition(trans);
-					ultimoEstado = novo;
-					
-					Transition trans2 = new Transition(novo, finalTabela, "");
-					fsm.addTransition(trans2);
-					
-			}
+			PickleCell pc = tr.getCells().get(0);
+				
+			Transition trans = new Transition(inicial, finalTabela, Contexto.getContext().getLinguagem().converter(this, campo, pc.getValue()));
+			fsm.addTransition(trans);				
 		}
 		return new Tupla<FSM, State>(fsm, finalTabela);
 	}

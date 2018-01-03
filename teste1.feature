@@ -1,7 +1,7 @@
 Feature: Teste da FSM
 
 Background:
-    Given Parte click[aaa]
+    When Parte click[aaa]
 
 Scenario: ramo 1
     When Parte 2
@@ -10,13 +10,13 @@ Scenario: ramo 1
     Then Parte 5
 
 Scenario: ramo2
-    Given Parte 6 use-valid-data-on:
+    Given Parte 6 use-valid-data:
     |cabecalho| cabecalho2 |
     |Maria| 13 |
     |João| 12 |
     And Parte 7
     Then Parte 8
-    Then Parte 9 use-valid-data-on:
+    Then Parte 9 use-valid-data:
     |cabecalho| cabecalho2 |
     |R1| R2 |
     |A1| A2 |
