@@ -10,6 +10,5 @@ Scenario: happy path
     |Aline| Zanin|
     |Aline2| Zanin2|
     And i click[button]
-    Then showed["save"] message
      
 

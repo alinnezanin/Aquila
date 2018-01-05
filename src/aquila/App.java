@@ -23,7 +23,7 @@ public class App {
 
 	public static void main(String[] args) {
 		
-		String arq = "cenario.txt";
+		String arq = args[0];
 			
 		
 		Scanner in = null;
@@ -84,8 +84,7 @@ public class App {
 					if(ca.verificar(ps))
 					{
 						pickleT = true;
-						Tupla<FSM, State> temp = ca.processar(ps); // Gera uma FSM separada
-						
+						Tupla<FSM, State> temp = ca.processar(ps); // Gera uma FSM separada				
 						
 						Tupla<FSM, State> tupla = FSM.unirFSM(fsm, temp.getPri(), ultimoEstado, temp.getSeg());
 						fsm = tupla.getPri();
@@ -112,20 +111,22 @@ public class App {
 
 			fsm = FSM.removeNonDeterminism(fsm);
 			Contexto.getContext().addFSM(p.getName(), new Tupla<FSM, State>(fsm, ultimoEstado));	
-			System.out.println(fsm);
+			//System.out.println(fsm);
 			
 			List<List<String>> sequencias = Contexto.getContext().getCobertura().gerarSequencias(fsm);
 			
 			for(List<String> ls : sequencias)
 			{
-				System.out.println("Sequencia");
+				//System.out.println("Sequencia");
 				for(String s : ls)
 				{
-					System.out.println(s);
+					//System.out.println(s);
 				}
-				System.out.println("\n\n\n");
+				//System.out.println("\n\n\n");
 			}
-						
+			
+			System.out.println(Contexto.getContext().getLinguagem().gerarCodigo(sequencias));
+			
 		}
 		
 	}
