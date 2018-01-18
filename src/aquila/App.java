@@ -23,11 +23,9 @@ public class App {
 
 	public static void main(String[] args) {
 		
+		// Leitura do arquivo Aquila
 		String arq = args[0];
-			
-		
 		Scanner in = null;
-		
 		try
 		{
 			in = new Scanner(new FileInputStream(arq), "UTF-8");
@@ -42,14 +40,18 @@ public class App {
 			sb.append(in.nextLine() + "\n");
 		}
 		
-
+		// Iniciando o processamento do parser, cada cenario vai retornar um pickle representando o cenario
 		Parser<GherkinDocument> parser = new Parser<GherkinDocument>(new AstBuilder());
 		GherkinDocument gd = parser.parse(sb.toString());
 		List<Pickle> pickles = new Compiler().compile(gd);
 		
+		// configuração do contexto, no momento adicionando para o framework que sera gerado o codigo e o algoritmo de cobertura
 		Contexto.getContext().setLinguagem(new Selenium());
 		Contexto.getContext().setCobertura(new BuscaProfundidade());
 		
+		
+		// Lista de comandos do aquila. Todos devem ser colocados aqui para funcionar corretamente. Posteriormente
+		// Cada um sera acionado com cada linha dos cenarios procurando os comandos aquila
 		List<ComandosAquila> listaComandos = new LinkedList<ComandosAquila>();
 		listaComandos.add(new UseValidData());
 		listaComandos.add(new Extender());
@@ -64,7 +66,8 @@ public class App {
 		listaComandos.add(new SelectData());
 		listaComandos.add(new Showed());
 		
-				
+		
+		// Exploração de cada cenario
 		for(Pickle p : pickles)
 		{
 			int contadorEstados = 0; //vai ser utilizado para os nomes dos estados
@@ -115,15 +118,15 @@ public class App {
 			
 			List<List<String>> sequencias = Contexto.getContext().getCobertura().gerarSequencias(fsm);
 			
-			for(List<String> ls : sequencias)
-			{
+			//for(List<String> ls : sequencias)
+			//{
 				//System.out.println("Sequencia");
-				for(String s : ls)
-				{
+				//for(String s : ls)
+				//{
 					//System.out.println(s);
-				}
+				//}
 				//System.out.println("\n\n\n");
-			}
+			//}
 			
 			System.out.println(Contexto.getContext().getLinguagem().gerarCodigo(sequencias));
 			

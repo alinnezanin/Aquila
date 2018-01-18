@@ -8,6 +8,11 @@ import aquila.estruturaDados.FSM;
 import aquila.estruturaDados.State;
 import aquila.estruturaDados.Tupla;
 
+
+//Singleton que armazena informações do contexto do parser, como para qual linguagem esta sendo gerado o codigo do output,
+//o algoritmo para fazer a cobertura da FSM e gerar o codigo final. Pode ser acessado em qualquer ponto do programa 
+//usando Contexto.getContext(). Inclui também todas as FSM geradas, podem ser usadas com o comando {} da linguagem aquila
+
 public class Contexto {
 	
 	private static Contexto instance = null;

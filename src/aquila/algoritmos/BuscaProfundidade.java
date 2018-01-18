@@ -1,6 +1,5 @@
 package aquila.algoritmos;
 
-import java.security.cert.TrustAnchor;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
