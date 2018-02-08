@@ -66,6 +66,9 @@ public class App {
 		listaComandos.add(new SelectData());
 		listaComandos.add(new Showed());
 		
+		ComandosAquila method = new Method();
+		
+		List<List<String>> sequencias = new LinkedList<List<String>>();
 		
 		// Exploração de cada cenario
 		for(Pickle p : pickles)
@@ -102,35 +105,27 @@ public class App {
 				}
 				if(!pickleT) 
 				{
-					State novo = new State(Integer.toString(contadorEstados));
+					Tupla<FSM, State> temp = method.processar(ps); // Gera uma FSM separada
+					
+					Tupla<FSM, State> tupla = FSM.unirFSM(fsm, temp.getPri(), ultimoEstado, temp.getSeg());
+					fsm = tupla.getPri();
+					
+					ultimoEstado = tupla.getSeg();
+					
+					contadorEstados = Integer.parseInt(ultimoEstado.getName());
 					contadorEstados++;
-					fsm.addState(novo);
-					fsm.addFinalState(novo);
-					Transition trans = new Transition(ultimoEstado, novo, ps.getText());
-					fsm.addTransition(trans);
-					ultimoEstado = novo;
+					break;
 				}
-			}
-
+				
+			}	
+			
 			fsm = FSM.removeNonDeterminism(fsm);
-			Contexto.getContext().addFSM(p.getName(), new Tupla<FSM, State>(fsm, ultimoEstado));	
-			//System.out.println(fsm);
-			
-			List<List<String>> sequencias = Contexto.getContext().getCobertura().gerarSequencias(fsm);
-			
-			//for(List<String> ls : sequencias)
-			//{
-				//System.out.println("Sequencia");
-				//for(String s : ls)
-				//{
-					//System.out.println(s);
-				//}
-				//System.out.println("\n\n\n");
-			//}
-			
-			System.out.println(Contexto.getContext().getLinguagem().gerarCodigo(sequencias));
-			
+			Contexto.getContext().addFSM(p.getName(), new Tupla<FSM, State>(fsm, ultimoEstado));
+			List<List<String>> temp = Contexto.getContext().getCobertura().gerarSequencias(fsm);
+			sequencias.addAll(temp);	
 		}
+		
+		System.out.println(Contexto.getContext().getLinguagem().gerarCodigo(sequencias));
 		
 	}
 }

@@ -2,6 +2,8 @@ package aquila.comandos;
 
 import java.util.List;
 
+import aquila.Contexto;
+
 public class Selenium implements Linguagem {
 
 	@Override
@@ -39,11 +41,11 @@ public class Selenium implements Linguagem {
 	public String gerarCodigo(List<List<String>> sequencias) {
 		int contador = 1;
 		StringBuilder resposta = new StringBuilder();
-		
+				
 		//Cabecalho do arquivo
-		resposta.append("Webdriver driver;\n@Before\npublic void setUp() {\n//setando o caminho do gecko\n"
+		resposta.append("Webdriver driver;\n\n@Before\npublic void setUp(){\n\t//setando o caminho do gecko\n"
 				+ "\tSystem.setProperty(\"webdriver.gecko.driver\", \"C:\\Eclipse\\geckodriver.exe\");\n"
-				+ "//instanciando o firefox\n\tdriver = new FirefoxDriver();\n}\n\n");
+				+ "\t//instanciando o firefox\n\tdriver = new FirefoxDriver();\n}\n\n");
 		
 		for(List<String> ls : sequencias)
 		{
@@ -56,6 +58,16 @@ public class Selenium implements Linguagem {
 			resposta.append("\n}\n\n");
 			contador++;
 		}
+		
+		for(String s :Contexto.getContext().listaMetodos())
+		{
+			resposta.append("public void " + s.substring(0, s.length()-2) + "\n");
+			resposta.append("{\n");
+			resposta.append("\t//TO DO\n");
+			resposta.append("}\n\n");
+		}
+		
+		
 		
 		return resposta.toString();
 	}

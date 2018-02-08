@@ -1,5 +1,7 @@
 package aquila;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import aquila.algoritmos.Cobertura;
@@ -19,7 +21,8 @@ public class Contexto {
 	private Linguagem linguagem = null;
 	private Cobertura cobertura = null;
 	
-	Map<String, Tupla<FSM, State>> contexto;
+	private List<String> metodos = null;
+	private Map<String, Tupla<FSM, State>> contexto;
 	
 	public static Contexto getContext()
 	{
@@ -30,6 +33,7 @@ public class Contexto {
 	private Contexto()
 	{
 		contexto = new HashMap<String, Tupla<FSM, State>>();
+		metodos = new LinkedList<String>();
 	}
 	
 	public  Tupla<FSM, State> getFSM(String nome)
@@ -56,5 +60,14 @@ public class Contexto {
 
 	public void setCobertura(Cobertura cobertura) {
 		this.cobertura = cobertura;
+	}
+	
+	public List<String> listaMetodos()
+	{
+		return this.metodos;
+	}
+	public void addMethod(String nome)
+	{
+		this.metodos.add(nome);
 	}
 }
