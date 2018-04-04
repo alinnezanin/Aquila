@@ -29,14 +29,15 @@ public class Selenium implements Linguagem {
 
 	@Override
 	public String converter(ComandosAquila ca, String campo, String valor) {
-		if(ca instanceof Put)return String.format("WebElement field= driver.findElement(By.name(\"%s\"));\n"
+		if(ca instanceof Put)return String.format("\\nWebElement field= driver.findElement(By.name(\"%s\"));\n"
 				+ "field.sendKey(\"%s\");\n", campo, valor);
-		if(ca instanceof UseValidData)return String.format(	"list = driver.findElements(By.name(\"%s\"));\nfield = list.get(0);\nvalor = (\"%s\");\n\nif(field.getTagName().equals(\"input\") && (field.getAttribute(\"type\").equals(\"text\")  || field.getAttribute(\"type\").equals(\"password\") || field.getAttribute(\"type\").equals(\"Date\") ||  field.getAttribute(\"type\").equals(\"datetime-local\") || field.getAttribute(\"type\").equals(\"email\") || field.getAttribute(\"type\").equals(\"month\") || field.getAttribute(\"type\").equals(\"number\")))\n{\n\tfield.sendKey(field);\n}\nelse if(field.getTagName().equals(\"input\") && field.getAttribute(\"type\").equals(\"radio\"))\n{\n\t field.click();\n}\nelse if(field.getTagName().equals(\"input\") && field.getAttribute(\"type\").equals(\"checkbox\"))\n{\n\tList<String> valores = valor.split(\"&\");\n\tfor(WebElement wb : list)\n\t{\n\t\tfor(String s : valores)\n\t\t{\n\t\tif(wb.getAttribute(\"value\").equals(s))\n\t\t\t{\n\t\t\t\twb.click();\n\t\t\t}\n\t\t}\n\t}\n}\nelse\n{\n\tSelect dropdown = new Select(field);\n\tdropdown.selectByIndex(0);\n}\n\n"
+		if(ca instanceof UseValidData)return String.format(	"\\nlist = driver.findElements(By.name(\"%s\"));\nfield = list.get(0);\nvalor = (\"%s\");\n\nif(field.getTagName().equals(\"input\") && (field.getAttribute(\"type\").equals(\"text\")  || field.getAttribute(\"type\").equals(\"password\") || field.getAttribute(\"type\").equals(\"Date\") ||  field.getAttribute(\"type\").equals(\"datetime-local\") || field.getAttribute(\"type\").equals(\"email\") || field.getAttribute(\"type\").equals(\"month\") || field.getAttribute(\"type\").equals(\"number\")))\n{\n\tfield.sendKey(field);\n}\nelse if(field.getTagName().equals(\"input\") && field.getAttribute(\"type\").equals(\"radio\"))\n{\n\t field.click();\n}\nelse if(field.getTagName().equals(\"input\") && field.getAttribute(\"type\").equals(\"checkbox\"))\n{\n\tList<String> valores = valor.split(\"&\");\n\tfor(WebElement wb : list)\n\t{\n\t\tfor(String s : valores)\n\t\t{\n\t\tif(wb.getAttribute(\"value\").equals(s))\n\t\t\t{\n\t\t\t\twb.click();\n\t\t\t}\n\t\t}\n\t}\n}\nelse\n{\n\tSelect dropdown = new Select(field);\n\tdropdown.selectByIndex(0);\n}\n\n"
 , campo, valor);
-		if(ca instanceof SelectData)return String.format("Select dropdown = new Select(driver.findElement(By.name(\"%s\")));\n"
+		if(ca instanceof SelectData)return String.format("\nSelect dropdown = new Select(driver.findElement(By.name(\"%s\")));\n"
 				+ "dropdown.selectByVisibleText(\"%s\");\n", campo, valor);
-		if(ca instanceof Checked)return String.format("field = driver.findElement(By.name(\"%s\");\nvalor = \"%s\";\n\nif(field.getTagName().equals(\"input\") && field.getAttribute(\"type\").equals(\"radio\"))\n{\n\tfield.click();\n}\nelse if(field.getTagName().equals(\"input\") && field.getAttribute(\"type\").equals(\"checkbox\"))\n{\n\tList<String> valores = valor.split(\"&\");\n\tfor(WebElement wb : list)\n\t{\n\t\tfor(String s : valores)\n\t\t{\n\t\t\tif(wb.getAttribute(\"value\").equals(s))\n\t\t\t{\n\t\t\twb.click();\n\t\t}\n\t}\n}\n}" ,campo, valor);
-		if(ca instanceof Choose) return String.format("field = driver.findElement(By.name(\"%s\");\nvalor = \"%s\";\n\nif(field.getTagName().equals(\"input\") && field.getAttribute(\"type\").equals(\"radio\"))\n{\n\tfield.click();\n}\nelse if(field.getTagName().equals(\"input\") && field.getAttribute(\"type\").equals(\"checkbox\"))\n{\n\tList<String> valores = valor.split(\"&\");\n\tfor(WebElement wb : list)\n\t{\n\t\tfor(String s : valores)\n\t\t{\n\t\t\tif(wb.getAttribute(\"value\").equals(s))\n\t\t\t{\n\t\t\twb.click();\n\t\t}\n\t}\n}\n}" ,campo, valor);
+		if(ca instanceof Checked)return String.format("\nfield = driver.findElement(By.name(\"%s\");\nvalor = \"%s\";\n\nif(field.getTagName().equals(\"input\") && field.getAttribute(\"type\").equals(\"radio\"))\n{\n\tfield.click();\n}\nelse if(field.getTagName().equals(\"input\") && field.getAttribute(\"type\").equals(\"checkbox\"))\n{\n\tList<String> valores = valor.split(\"&\");\n\tfor(WebElement wb : list)\n\t{\n\t\tfor(String s : valores)\n\t\t{\n\t\t\tif(wb.getAttribute(\"value\").equals(s))\n\t\t\t{\n\t\t\twb.click();\n\t\t}\n\t}\n}\n}" ,campo, valor);
+		if(ca instanceof Choose) return String.format("\nfield = driver.findElement(By.name(\"%s\");\nvalor = \"%s\";\n\nif(field.getTagName().equals(\"input\") && field.getAttribute(\"type\").equals(\"radio\"))\n{\n\tfield.click();\n}\nelse if(field.getTagName().equals(\"input\") && field.getAttribute(\"type\").equals(\"checkbox\"))\n{\n\tList<String> valores = valor.split(\"&\");\n\tfor(WebElement wb : list)\n\t{\n\t\tfor(String s : valores)\n\t\t{\n\t\t\tif(wb.getAttribute(\"value\").equals(s))\n\t\t\t{\n\t\t\twb.click();\n\t\t}\n\t}\n}\n}" ,campo, valor);
+		if(ca instanceof ShowedIn)return String.format("\nPattern p = Pattern.compile(\"(.*<.*>.*)*<.*name=\"%s\".*>(.*<.*>.*)*%s\");\nMatcher m = p.matcher(ps.getText());\nassert(true,m.find());\n", campo, valor);
 		return null;
 	}
 
@@ -62,15 +63,25 @@ public class Selenium implements Linguagem {
 			contador++;
 		}
 		
+		
+		
+		
+		return resposta.toString();
+	}
+	
+	public String gerarBiblioteca()
+	{
+		StringBuilder resposta = new StringBuilder();
+		resposta.append("public Class AquilaBib{\n\n");
 		for(String s :Contexto.getContext().listaMetodos())
 		{
-			resposta.append("public void " + s.substring(0, s.length()-2) + "\n");
-			resposta.append("{\n");
-			resposta.append("\t//TO DO\n");
-			resposta.append("}\n\n");
+			resposta.append("\tpublic static void " + s.substring(0, s.length()-2) + "\n");
+			resposta.append("\t{\n");
+			resposta.append("\t\t//TO DO\n");
+			resposta.append("\t}\n\n");
 		}
 		
-		
+		resposta.append("\n}");
 		
 		return resposta.toString();
 	}
@@ -78,6 +89,7 @@ public class Selenium implements Linguagem {
 	
 
 	
+
 	
 	
 

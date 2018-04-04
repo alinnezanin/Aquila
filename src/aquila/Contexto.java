@@ -20,6 +20,10 @@ public class Contexto {
 	private static Contexto instance = null;
 	private Linguagem linguagem = null;
 	private Cobertura cobertura = null;
+	private String arqSaida = "";
+	private String arqEntrada = "";
+	private boolean gerarBib = false;
+	
 	
 	private List<String> metodos = null;
 	private Map<String, Tupla<FSM, State>> contexto;
@@ -69,5 +73,29 @@ public class Contexto {
 	public void addMethod(String nome)
 	{
 		this.metodos.add(nome);
+	}
+
+	public String getArqSaida() {
+		return arqSaida;
+	}
+
+	public void setArqSaida(String arqSaida) {
+		this.arqSaida = arqSaida;
+	}
+
+	public String getArqEntrada() {
+		return arqEntrada;
+	}
+
+	public void setArqEntrada(String arqEntrada) {
+		this.arqEntrada = arqEntrada;
+	}
+
+	public boolean isGerarBib() {
+		return gerarBib;
+	}
+
+	public void setGerarBib(boolean gerarBib) {
+		this.gerarBib = gerarBib;
 	}
 }

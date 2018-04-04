@@ -1,6 +1,9 @@
 package aquila;
 
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.Writer;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -9,7 +12,6 @@ import aquila.algoritmos.BuscaProfundidade;
 import aquila.comandos.*;
 import aquila.estruturaDados.FSM;
 import aquila.estruturaDados.State;
-import aquila.estruturaDados.Transition;
 import aquila.estruturaDados.Tupla;
 import gherkin.AstBuilder;
 import gherkin.Parser;
@@ -23,8 +25,12 @@ public class App {
 
 	public static void main(String[] args) {
 		
-		// Leitura do arquivo Aquila
-		String arq = args[0];
+		//Processa parametros de entrada
+		parametros(args);
+		
+		// Leitura do arquivo Aquila		
+		String arq = Contexto.getContext().getArqEntrada();
+		
 		Scanner in = null;
 		try
 		{
@@ -126,7 +132,49 @@ public class App {
 			sequencias.addAll(temp);	
 		}
 		
-		System.out.println(Contexto.getContext().getLinguagem().gerarCodigo(sequencias));
+		//Salvar arquivos
 		
+		//System.out.println(Contexto.getContext().getLinguagem().gerarCodigo(sequencias));
+		//System.out.println(Contexto.getContext().getLinguagem().gerarBiblioteca());
+		
+		salvar(Contexto.getContext().getArqSaida(), Contexto.getContext().getLinguagem().gerarCodigo(sequencias));
+		if(Contexto.getContext().isGerarBib())
+		{
+			salvar("AqulaBib.java", Contexto.getContext().getLinguagem().gerarBiblioteca());
+		}
+		System.out.println("Pronto");
+	}
+	
+	//Metodo para salvar arquivos
+	private static void salvar(String nomeArq, String texto)
+	{
+		File arq = new File(nomeArq);
+		
+		Writer wr;
+		try
+		{
+			wr = new FileWriter(arq);
+			wr.write(texto);
+			wr.flush();
+			wr.close();
+		}
+		catch(Exception e)
+		{
+			System.out.println("Erro na escrita do arquivo " + nomeArq);
+		}
+	}
+	
+	//Metodo para processar os parametros de entrada
+	private static void parametros(String[] par)
+	{
+		
+		Contexto contexto = Contexto.getContext();
+				
+		for(String s : par)
+		{
+			if(s.contains("-i"))contexto.setArqEntrada(s.substring(2));
+			if(s.contains("-o"))contexto.setArqSaida(s.substring(2));
+			if(s.contains("cb"))contexto.setGerarBib(true);
+		}
 	}
 }

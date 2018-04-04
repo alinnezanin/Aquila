@@ -20,6 +20,11 @@ public class Method implements ComandosAquila {
 		String input = ps.getText();
 		input = input.replace(' ', '_');
 		input += "();\n";
+		if(!Contexto.getContext().listaMetodos().contains(input))
+		{
+			Contexto.getContext().addMethod(input);
+		}
+		input = "AquilaBib." + input;
 		
 		State inicio = new State("0");
 		State fim = new State("1");
@@ -34,10 +39,7 @@ public class Method implements ComandosAquila {
 		Transition tran = new Transition(inicio, fim, input);
 		resposta.addTransition(tran);
 		
-		if(!Contexto.getContext().listaMetodos().contains(input))
-		{
-			Contexto.getContext().addMethod(input);
-		}
+		
 		
 		return new Tupla<FSM, State>(resposta, fim);
 	}

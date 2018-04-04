@@ -26,7 +26,7 @@ public class ShowedIn implements ComandosAquila {
 		{
 			System.err.println("Comando incorreto: " + ps.getText());
 		}
-		input = Contexto.getContext().getLinguagem().converter(this, m.group(1));
+		input = Contexto.getContext().getLinguagem().converter(this, m.group(2), m.group(1));
 		
 		State inicio = new State("0");
 		State fim = new State("1");
