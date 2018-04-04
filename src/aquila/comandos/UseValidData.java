@@ -20,13 +20,15 @@ public class UseValidData implements ComandosAquila {
 
 	@Override
 	public boolean verificar(PickleStep ps) {
-		
-		if(ps.getText().matches("use_valid_data$"))return false;
-		for(Argument a : ps.getArgument())
+	
+		if(ps.getText().matches(".*use-valid-data:$"))
 		{
-			if(a instanceof PickleTable)
+			for(Argument a : ps.getArgument())
 			{
-				return true;
+				if(a instanceof PickleTable)
+				{
+					return true;
+				}
 			}
 		}
 		return false;

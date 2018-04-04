@@ -8,25 +8,31 @@ import aquila.estruturaDados.FSM;
 import aquila.estruturaDados.State;
 import aquila.estruturaDados.Transition;
 import aquila.estruturaDados.Tupla;
+import gherkin.pickles.Argument;
+import gherkin.pickles.PickleCell;
+import gherkin.pickles.PickleRow;
 import gherkin.pickles.PickleStep;
+import gherkin.pickles.PickleTable;
 
-public class Showed implements ComandosAquila {
+public class Checked implements ComandosAquila {
 
 	@Override
 	public boolean verificar(PickleStep ps) {
-		return ps.getText().matches(".*showed\\[.*\\]$");
+		return ps.getText().matches(".*checked\\[.*\\]$");
 	}
+	
 
 	@Override
 	public Tupla<FSM, State> processar(PickleStep ps) {
-		Pattern p = Pattern.compile(".*showed\\[(.*)\\]$");
+		Pattern p = Pattern.compile(".*checked\\[(.*)\\]$");
 		Matcher m = p.matcher(ps.getText());
-		String input = "";
+		String field = "";
 		if(!m.find())
 		{
 			System.err.println("Comando incorreto: " + ps.getText());
 		}
-		input = Contexto.getContext().getLinguagem().converter(this, m.group(1));
+		
+		field = m.group(1);  
 		
 		State inicio = new State("0");
 		State fim = new State("1");
@@ -38,10 +44,28 @@ public class Showed implements ComandosAquila {
 		resposta.addFinalState(inicio);
 		resposta.setStart(inicio);
 		
-		Transition tran = new Transition(inicio, fim, input);
-		resposta.addTransition(tran);
+		Argument arg = null;
+		for(Argument a : ps.getArgument())
+		{
+			if(a instanceof PickleTable)
+			{
+				arg = a;
+			}
+		}
+		
+		PickleTable table = (PickleTable) arg;
+		
+		for(PickleRow tr : table.getRows())
+		{
+			PickleCell pc = tr.getCells().get(0);
+			
+			String input = Contexto.getContext().getLinguagem().converter(this, field, pc.getValue());
+			Transition tran = new Transition(inicio, fim, input);
+			resposta.addTransition(tran);
+		}
 		
 		return new Tupla<FSM, State>(resposta, fim);
+		
 	}
 
 }

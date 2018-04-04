@@ -25,3 +25,7 @@ Scenario: ramo3
     Given P1
     Then p2{ramo 1}
     Then p3
+    Then checked[checkbox]
+    |Checkbox1 & Checkbox2|
+    |Checkbox2|
+    Then olha showed[bla bla bla]

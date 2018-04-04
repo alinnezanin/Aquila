@@ -10,16 +10,16 @@ import aquila.estruturaDados.Transition;
 import aquila.estruturaDados.Tupla;
 import gherkin.pickles.PickleStep;
 
-public class Showed implements ComandosAquila {
+public class MouseOver implements ComandosAquila {
 
 	@Override
 	public boolean verificar(PickleStep ps) {
-		return ps.getText().matches(".*showed\\[.*\\]$");
+		return ps.getText().matches(".*mouse-over\\[.*\\]$");
 	}
 
 	@Override
 	public Tupla<FSM, State> processar(PickleStep ps) {
-		Pattern p = Pattern.compile(".*showed\\[(.*)\\]$");
+		Pattern p = Pattern.compile(".*mouse-over\\[(.*)\\]$");
 		Matcher m = p.matcher(ps.getText());
 		String input = "";
 		if(!m.find())

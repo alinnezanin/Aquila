@@ -16,11 +16,13 @@ public class Selenium implements Linguagem {
 				+ "click.click();\n", valor);
 		if(ca instanceof DontFillOut)return String.format("WebElement field= driver.findElement(By.name(\"%s\"));\n"
 				+ "field.sendKey(“”);\n", valor);
-		if(ca instanceof Enable)return "WebElement d = driver.findElement(By.name(\"firstname\"));\nboolean enable = d.isEnabled();\n"
-				+ "	assertEquals(true, enable);\n";
-		if(ca instanceof Disable)return "WebElement d = driver.findElement(By.name(\"firstname\"));\nboolean enable = d.isEnabled();\n"
-				+ "	assertEquals(false, enable);\n";
-		
+		if(ca instanceof Enable)return String.format("WebElement d = driver.findElement(By.name(\"%s\"));\nboolean enable = d.isEnabled();\n"
+				+ "	assertEquals(true, enable);\n",valor);
+		if(ca instanceof Disable)return String.format("WebElement d = driver.findElement(By.name(\"%s\"));\nboolean enable = d.isEnabled();\n"
+				+ "	assertEquals(false, enable);\n", valor);
+		if(ca instanceof Showed)return String.format("\nassertEquals(true, Driver.getPageSource().contains(\"%s\"));\n", valor);
+		if(ca instanceof Opened)return String.format("\nassertEquals(\"%s\", driver.getCurrentUrl());\n",valor);
+		if(ca instanceof MouseOver)return String.format("\nfield = driver.findElement(By.linkText(\"%s\"));\naction = new Actions(driver);\naction.moveToElement(element).build().perform();\n", valor);
 		
 		return null;
 	}
@@ -29,11 +31,12 @@ public class Selenium implements Linguagem {
 	public String converter(ComandosAquila ca, String campo, String valor) {
 		if(ca instanceof Put)return String.format("WebElement field= driver.findElement(By.name(\"%s\"));\n"
 				+ "field.sendKey(\"%s\");\n", campo, valor);
-		if(ca instanceof UseValidData)return String.format("WebElement field= driver.findElement(By.name(%s));\nif(field.getTagName().equals(“input”) && field.getAttribute(\"type\").equals(\"text\"))\n"
-			+	"{\n\tfield.sendKey(%s)\n}\nelse if(field.getTagName().equals(\"input\") && field.getAttribute(\"type\").equals(\"radio\"))\n{\n"
-			+	"\tfield.click();\n}\nelse\n{\n\tSelect dropdown = new Select(driver.findElement(By.name(%s)));\n\tdropdown.selectByIndex(0);\n}\n\n", campo, valor, valor);
+		if(ca instanceof UseValidData)return String.format(	"list = driver.findElements(By.name(\"%s\"));\nfield = list.get(0);\nvalor = (\"%s\");\n\nif(field.getTagName().equals(\"input\") && (field.getAttribute(\"type\").equals(\"text\")  || field.getAttribute(\"type\").equals(\"password\") || field.getAttribute(\"type\").equals(\"Date\") ||  field.getAttribute(\"type\").equals(\"datetime-local\") || field.getAttribute(\"type\").equals(\"email\") || field.getAttribute(\"type\").equals(\"month\") || field.getAttribute(\"type\").equals(\"number\")))\n{\n\tfield.sendKey(field);\n}\nelse if(field.getTagName().equals(\"input\") && field.getAttribute(\"type\").equals(\"radio\"))\n{\n\t field.click();\n}\nelse if(field.getTagName().equals(\"input\") && field.getAttribute(\"type\").equals(\"checkbox\"))\n{\n\tList<String> valores = valor.split(\"&\");\n\tfor(WebElement wb : list)\n\t{\n\t\tfor(String s : valores)\n\t\t{\n\t\tif(wb.getAttribute(\"value\").equals(s))\n\t\t\t{\n\t\t\t\twb.click();\n\t\t\t}\n\t\t}\n\t}\n}\nelse\n{\n\tSelect dropdown = new Select(field);\n\tdropdown.selectByIndex(0);\n}\n\n"
+, campo, valor);
 		if(ca instanceof SelectData)return String.format("Select dropdown = new Select(driver.findElement(By.name(\"%s\")));\n"
 				+ "dropdown.selectByVisibleText(\"%s\");\n", campo, valor);
+		if(ca instanceof Checked)return String.format("field = driver.findElement(By.name(\"%s\");\nvalor = \"%s\";\n\nif(field.getTagName().equals(\"input\") && field.getAttribute(\"type\").equals(\"radio\"))\n{\n\tfield.click();\n}\nelse if(field.getTagName().equals(\"input\") && field.getAttribute(\"type\").equals(\"checkbox\"))\n{\n\tList<String> valores = valor.split(\"&\");\n\tfor(WebElement wb : list)\n\t{\n\t\tfor(String s : valores)\n\t\t{\n\t\t\tif(wb.getAttribute(\"value\").equals(s))\n\t\t\t{\n\t\t\twb.click();\n\t\t}\n\t}\n}\n}" ,campo, valor);
+		if(ca instanceof Choose) return String.format("field = driver.findElement(By.name(\"%s\");\nvalor = \"%s\";\n\nif(field.getTagName().equals(\"input\") && field.getAttribute(\"type\").equals(\"radio\"))\n{\n\tfield.click();\n}\nelse if(field.getTagName().equals(\"input\") && field.getAttribute(\"type\").equals(\"checkbox\"))\n{\n\tList<String> valores = valor.split(\"&\");\n\tfor(WebElement wb : list)\n\t{\n\t\tfor(String s : valores)\n\t\t{\n\t\t\tif(wb.getAttribute(\"value\").equals(s))\n\t\t\t{\n\t\t\twb.click();\n\t\t}\n\t}\n}\n}" ,campo, valor);
 		return null;
 	}
 
@@ -43,7 +46,7 @@ public class Selenium implements Linguagem {
 		StringBuilder resposta = new StringBuilder();
 				
 		//Cabecalho do arquivo
-		resposta.append("Webdriver driver;\n\n@Before\npublic void setUp(){\n\t//setando o caminho do gecko\n"
+		resposta.append("Webdriver driver;\nList<WebElements> list;\nWebElement field;\nString valor;\nActions action;\n\n\n@Before\npublic void setUp(){\n\t//setando o caminho do gecko\n"
 				+ "\tSystem.setProperty(\"webdriver.gecko.driver\", \"C:\\Eclipse\\geckodriver.exe\");\n"
 				+ "\t//instanciando o firefox\n\tdriver = new FirefoxDriver();\n}\n\n");
 		
@@ -71,6 +74,15 @@ public class Selenium implements Linguagem {
 		
 		return resposta.toString();
 	}
+	
+	
+
+	
+	
+	
+
+	
+	
 	
 	
 	

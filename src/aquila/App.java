@@ -65,6 +65,8 @@ public class App {
 		listaComandos.add(new Open());
 		listaComandos.add(new SelectData());
 		listaComandos.add(new Showed());
+		listaComandos.add(new Checked());
+		listaComandos.add(new Choose());
 		
 		ComandosAquila method = new Method();
 		
@@ -114,7 +116,6 @@ public class App {
 					
 					contadorEstados = Integer.parseInt(ultimoEstado.getName());
 					contadorEstados++;
-					break;
 				}
 				
 			}	
