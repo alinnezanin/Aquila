@@ -140,7 +140,7 @@ public class App {
 		salvar(Contexto.getContext().getArqSaida(), Contexto.getContext().getLinguagem().gerarCodigo(sequencias));
 		if(Contexto.getContext().isGerarBib())
 		{
-			salvar("AqulaBib.java", Contexto.getContext().getLinguagem().gerarBiblioteca());
+			salvar("AquilaBib.java", Contexto.getContext().getLinguagem().gerarBiblioteca());
 		}
 		System.out.println("Pronto");
 	}
