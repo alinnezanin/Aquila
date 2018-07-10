@@ -8,6 +8,7 @@ import aquila.estruturaDados.FSM;
 import aquila.estruturaDados.State;
 import aquila.estruturaDados.Transition;
 import aquila.estruturaDados.Tupla;
+import gherkin.ast.TableRow;
 import gherkin.pickles.Argument;
 import gherkin.pickles.PickleCell;
 import gherkin.pickles.PickleRow;
@@ -22,6 +23,8 @@ public class Choose implements ComandosAquila {
 	}
 
 	@Override
+	//FSM é a FSM que esta montando e estado é o final
+	//PickleStep é o comando da aquila ou gherkin
 	public Tupla<FSM, State> processar(PickleStep ps) {
 		Pattern p = Pattern.compile(".*choose\\[(.*)\\]$");
 		Matcher m = p.matcher(ps.getText());
@@ -54,8 +57,10 @@ public class Choose implements ComandosAquila {
 		
 		PickleTable table = (PickleTable) arg;
 		
-		for(PickleRow tr : table.getRows())
+		for(int a=1; a<table.getRows().size(); a++)
 		{
+			PickleRow tr = table.getRows().get(a);
+			
 			PickleCell pc = tr.getCells().get(0);
 			
 			String input = Contexto.getContext().getLinguagem().converter(this, field, pc.getValue());
