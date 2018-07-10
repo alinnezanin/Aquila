@@ -55,8 +55,9 @@ public class SelectData implements ComandosAquila {
 		
 		PickleTable table = (PickleTable) arg;
 
-		for(PickleRow tr : table.getRows())
+		for(int a=1; a<table.getRows().size(); a++)
 		{
+			PickleRow tr = table.getRows().get(a);
 			PickleCell pc = tr.getCells().get(0);
 
 			Transition trans = new Transition(inicio, fim, Contexto.getContext().getLinguagem().converter(this, campo, pc.getValue()));
