@@ -55,8 +55,9 @@ public class Checked implements ComandosAquila {
 		
 		PickleTable table = (PickleTable) arg;
 		
-		for(PickleRow tr : table.getRows())
+		for(int a=1; a<table.getRows().size(); a++)
 		{
+			PickleRow tr = table.getRows().get(a);
 			PickleCell pc = tr.getCells().get(0);
 			
 			String input = Contexto.getContext().getLinguagem().converter(this, field, pc.getValue());
