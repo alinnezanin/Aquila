@@ -19,14 +19,15 @@ import gherkin.ast.GherkinDocument;
 import gherkin.pickles.Compiler;
 import gherkin.pickles.Pickle;
 import gherkin.pickles.PickleStep;
+import javax.swing.JOptionPane;
 
 
 public class App {
 
-	public static void main(String[] args) {
+	public static void principal(String[] par) {
 		
 		//Processa parametros de entrada
-		parametros(args);
+		parametros(par);
 		
 		// Leitura do arquivo Aquila		
 		String arq = Contexto.getContext().getArqEntrada();
@@ -51,7 +52,7 @@ public class App {
 		GherkinDocument gd = parser.parse(sb.toString());
 		List<Pickle> pickles = new Compiler().compile(gd);
 		
-		// configuração do contexto, no momento adicionando para o framework que sera gerado o codigo e o algoritmo de cobertura
+		// configuraï¿½ï¿½o do contexto, no momento adicionando para o framework que sera gerado o codigo e o algoritmo de cobertura
 		Contexto.getContext().setLinguagem(new Selenium());
 		Contexto.getContext().setCobertura(new BuscaProfundidade());
 		
@@ -78,7 +79,7 @@ public class App {
 		
 		List<List<String>> sequencias = new LinkedList<List<String>>();
 		
-		// Exploração de cada cenario
+		// Exploraï¿½ï¿½o de cada cenario
 		for(Pickle p : pickles)
 		{
 			int contadorEstados = 0; //vai ser utilizado para os nomes dos estados
@@ -142,7 +143,10 @@ public class App {
 		{
 			salvar("AquilaBib.java", Contexto.getContext().getLinguagem().gerarBiblioteca());
 		}
+                
+                JOptionPane.showMessageDialog(null, "Gerado com Sucesso");
 		System.out.println("Pronto");
+                
 	}
 	
 	//Metodo para salvar arquivos
