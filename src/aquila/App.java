@@ -74,6 +74,7 @@ public class App {
 		listaComandos.add(new Showed());
 		listaComandos.add(new Checked());
 		listaComandos.add(new Choose());
+		listaComandos.add(new Opened());
 		
 		ComandosAquila method = new Method();
 		
