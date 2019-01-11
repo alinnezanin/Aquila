@@ -15,14 +15,17 @@ public class Selenium implements Linguagem {
 		if(ca instanceof Link)return String.format("WebElement click = driver.findElement(By.partialLinkText(\"%s\"));\n"
 				+ "click.click();\n", valor);
 		if(ca instanceof DontFillOut)return String.format("WebElement field= driver.findElement(By.name(\"%s\"));\n"
-				+ "field.sendKey(“”);\n", valor);
+				+ "field.sendKey(ï¿½ï¿½);\n", valor);
 		if(ca instanceof Enable)return String.format("WebElement d = driver.findElement(By.name(\"%s\"));\nboolean enable = d.isEnabled();\n"
 				+ "	assertEquals(true, enable);\n",valor);
 		if(ca instanceof Disable)return String.format("WebElement d = driver.findElement(By.name(\"%s\"));\nboolean enable = d.isEnabled();\n"
 				+ "	assertEquals(false, enable);\n", valor);
-		if(ca instanceof Showed)return String.format("\nassertEquals(true, Driver.getPageSource().contains(\"%s\"));\n", valor);
-		if(ca instanceof Opened)return String.format("\nassertEquals(\"%s\", driver.getCurrentUrl());\n",valor);
-		if(ca instanceof MouseOver)return String.format("\nfield = driver.findElement(By.linkText(\"%s\"));\naction = new Actions(driver);\naction.moveToElement(element).build().perform();\n", valor);
+		if(ca instanceof Showed)return String.format("assertEquals(true, driver.getPageSource().contains(\"%s\"));\n", valor);
+                
+                if(ca instanceof ShowedTitle)return String.format("assertEquals(true, driver.gettitle().contains(\"%s\"));\n", valor);
+
+		if(ca instanceof Opened)return String.format("assertEquals(\"%s\", driver.getCurrentUrl());\n",valor);
+		if(ca instanceof MouseOver)return String.format("field = driver.findElement(By.linkText(\"%s\"));\naction = new Actions(driver);\naction.moveToElement(element).build().perform();\n", valor);
 		
 		return null;
 	}
@@ -37,8 +40,8 @@ public class Selenium implements Linguagem {
 				+ "dropdown.selectByVisibleText(\"%s\");\n", campo, valor);
 		if(ca instanceof Checked)return String.format("\nfield = driver.findElement(By.name(\"%s\");\nvalor = \"%s\";\n\nif(field.getTagName().equals(\"input\") && field.getAttribute(\"type\").equals(\"radio\"))\n{\n\tfield.click();\n}\nelse if(field.getTagName().equals(\"input\") && field.getAttribute(\"type\").equals(\"checkbox\"))\n{\n\tList<String> valores = valor.split(\"&\");\n\tfor(WebElement wb : list)\n\t{\n\t\tfor(String s : valores)\n\t\t{\n\t\t\tif(wb.getAttribute(\"value\").equals(s))\n\t\t\t{\n\t\t\twb.click();\n\t\t}\n\t}\n}\n}" ,campo, valor);
 		if(ca instanceof Choose) return String.format("\nfield = driver.findElement(By.name(\"%s\");\nvalor = \"%s\";\n\nif(field.getTagName().equals(\"input\") && field.getAttribute(\"type\").equals(\"radio\"))\n{\n\tfield.click();\n}\nelse if(field.getTagName().equals(\"input\") && field.getAttribute(\"type\").equals(\"checkbox\"))\n{\n\tList<String> valores = valor.split(\"&\");\n\tfor(WebElement wb : list)\n\t{\n\t\tfor(String s : valores)\n\t\t{\n\t\t\tif(wb.getAttribute(\"value\").equals(s))\n\t\t\t{\n\t\t\twb.click();\n\t\t}\n\t}\n}\n}" ,campo, valor);
-		if(ca instanceof ShowedIn)return String.format("\nPattern p = Pattern.compile(\"(.*<.*>.*)*<.*name=\"%s\".*>(.*<.*>.*)*%s\");\nMatcher m = p.matcher(ps.getText());\nassert(true,m.find());\n", campo, valor);
-		return null;
+		if(ca instanceof ShowedIn)return String.format("\nPattern p = Pattern.compile(\"(.*<.*>.*)*<.*name=\"%s\".*>(.*<.*>.*)*%s\");\nMatcher m = p.matcher(driver.getPageSource());\nassert(true,m.find());\n", campo, valor);
+                return null;
 	}
 
 	@Override

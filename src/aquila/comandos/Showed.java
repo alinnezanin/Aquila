@@ -19,6 +19,7 @@ public class Showed implements ComandosAquila {
 
 	@Override
 	public Tupla<FSM, State> processar(PickleStep ps) {
+            
 		Pattern p = Pattern.compile(".*showed\\[(.*)\\]$");
 		Matcher m = p.matcher(ps.getText());
 		String input = "";

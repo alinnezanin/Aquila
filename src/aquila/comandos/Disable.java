@@ -6,16 +6,27 @@ import aquila.estruturaDados.State;
 import aquila.estruturaDados.Transition;
 import aquila.estruturaDados.Tupla;
 import gherkin.pickles.PickleStep;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Disable implements ComandosAquila {
 
 	@Override
 	public boolean verificar(PickleStep ps) {
-		return ps.getText().matches(".*disable$");
+		return ps.getText().matches(".*disable\\[.*\\]$");
 	}
 
 	@Override
 	public Tupla<FSM, State> processar(PickleStep ps) {
+                Pattern p = Pattern.compile(".*disable\\[(.*)\\]$");
+		Matcher m = p.matcher(ps.getText());
+		String input = "";
+		if(!m.find())
+		{
+			System.err.println("Comando incorreto: " + ps.getText());
+		}
+		input = Contexto.getContext().getLinguagem().converter(this, m.group(1));
+                
 		State inicio = new State("0");
 		State fim = new State("1");
 		
@@ -26,7 +37,7 @@ public class Disable implements ComandosAquila {
 		resposta.addFinalState(inicio);
 		resposta.setStart(inicio);
 		
-		Transition tran = new Transition(inicio, fim, Contexto.getContext().getLinguagem().converter(this, ""));
+		Transition tran = new Transition(inicio, fim, input);
 		resposta.addTransition(tran);
 		
 		return new Tupla<FSM, State>(resposta, fim);

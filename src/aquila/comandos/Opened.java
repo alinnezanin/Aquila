@@ -2,7 +2,6 @@ package aquila.comandos;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import aquila.Contexto;
 import aquila.estruturaDados.FSM;
 import aquila.estruturaDados.State;

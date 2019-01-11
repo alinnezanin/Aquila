@@ -1,0 +1,14 @@
+<URL> - OK
+CLICK[] - OK
+USE-VALID-DATA - OK
+PUT - OK
+CHECKED - OK
+CHOOSE - OK (tem que escrever com inicial minuscula)
+SELECT-DATA - OK
+SHOWED - ok
+MOUSE-OVER - ok
+{CENARIO} - ok
+ENABLE - ok
+DISABLE - ok
+SHOWED-TITLE - ok
+DONT-FILL-OUT - ok

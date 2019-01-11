@@ -23,16 +23,25 @@ public class Put implements ComandosAquila {
 
 	@Override
 	public Tupla<FSM, State> processar(PickleStep ps) {
-		
-		Pattern p = Pattern.compile(".*put\\[.*\\]$");
+		Pattern p = Pattern.compile(".*put\\[(.*)\\]$");
 		Matcher m = p.matcher(ps.getText());
-		String campo  = "";
-		
+		String field = "";
 		if(!m.find())
 		{
-			System.err.println("Erro comando: " + ps.getText());
+			System.err.println("Comando incorreto: " + ps.getText());
 		}
-		campo = m.group(1);
+		
+		field = m.group(1);  
+		
+		State inicio = new State("0");
+		State fim = new State("1");
+		
+		FSM resposta = new FSM();
+		resposta.addState(inicio);
+		resposta.addState(fim);
+		resposta.addFinalState(fim);
+		resposta.addFinalState(inicio);
+		resposta.setStart(inicio);
 		
 		Argument arg = null;
 		for(Argument a : ps.getArgument())
@@ -43,33 +52,20 @@ public class Put implements ComandosAquila {
 			}
 		}
 		
-		int contadorEstados = 0; //vai ser utilizado para os nomes dos estados
-		State inicial = new State(Integer.toString(contadorEstados));
-
-		
-		State finalTabela = new State(Integer.toString(contadorEstados));
-
-		
-		FSM fsm = new FSM();
-		fsm.addState(inicial);
-		fsm.addFinalState(inicial);
-		fsm.setStart(inicial);
-		
-		fsm.addState(finalTabela);
-		fsm.addFinalState(finalTabela);
-		
-		
 		PickleTable table = (PickleTable) arg;
-
-		for(PickleRow tr : table.getRows())
+		
+		for(int a=1; a<table.getRows().size(); a++)
 		{
-
+			PickleRow tr = table.getRows().get(a);
 			PickleCell pc = tr.getCells().get(0);
-				
-			Transition trans = new Transition(inicial, finalTabela, Contexto.getContext().getLinguagem().converter(this, campo, pc.getValue()));
-			fsm.addTransition(trans);				
+			
+			String input = Contexto.getContext().getLinguagem().converter(this, field, pc.getValue());
+			Transition tran = new Transition(inicio, fim, input);
+			resposta.addTransition(tran);
 		}
-		return new Tupla<FSM, State>(fsm, finalTabela);
+		
+		return new Tupla<FSM, State>(resposta, fim);
+		
 	}
 
 }

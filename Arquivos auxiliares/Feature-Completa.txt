@@ -1,0 +1,83 @@
+Feature: Teste da Aquila
+
+Scenario: Put
+Given <xxx>
+When put[abc]
+|abc|
+|12345|
+Then showed[hahahahahaa]
+
+
+Scenario: select-data
+Given <http://www.xxx.com>
+When I select-data[xdx]
+	|xdx|
+	|abcd|
+Then showed[Africa]
+
+Scenario: {cenario anterior}
+Given {select-data} 
+When  click[abcbdhdd]
+
+Scenario: use-valid-data showed-title
+Given <http://www.xxx.com>
+When use-valid-data:
+    |a|b|c|
+	|a1|b1|c1|
+Then showed-title[lalalala2]
+
+Scenario: checked
+Given <http://www.xxx.com>
+When checked[profession]
+	|profession|
+	|Automation Tester|
+	
+	
+Scenario: checked-choose
+Given <http://www.xxx.com>
+When choose[profession]
+	|profession|
+	|Automation Tester|
+
+Scenario: click showed
+Given <http://www.xxx.com>
+When click[xxx]
+Then showed[hahahahahaa]
+
+Scenario: ENABLE
+Given <http://www.xxx.com>
+When enable[adef]
+
+Scenario: DISABLE
+Given <http://www.xxx.com>
+When disable[adef]
+
+Scenario: dont-fill-out
+Given <http://www.xxx.com>
+When disable[adef]
+
+Scenario: mouse-over
+Given <http://www.xxx.com>
+When mouse-over[xddd]
+And click[xxx]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
