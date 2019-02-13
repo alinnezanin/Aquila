@@ -41,23 +41,32 @@ public class TelaInicial extends javax.swing.JFrame {
         jMenuBar2 = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
+        jMenuBar3 = new javax.swing.JMenuBar();
+        jMenu5 = new javax.swing.JMenu();
+        jMenu6 = new javax.swing.JMenu();
+        jMenuBar4 = new javax.swing.JMenuBar();
+        jMenu7 = new javax.swing.JMenu();
+        jMenu8 = new javax.swing.JMenu();
         jPanel1 = new javax.swing.JPanel();
-        btnSelecionarFuncionalidade = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtFuncionalidade = new javax.swing.JTextField();
+        btnSelecionarFuncionalidade = new javax.swing.JButton();
+        btnSelecionarFuncionalidade1 = new javax.swing.JButton();
+        txtScript = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txtBiblioteca = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        txtScript = new javax.swing.JTextField();
-        btnGerar = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
-        btnSelecionarFuncionalidade1 = new javax.swing.JButton();
         btnSelecionarFuncionalidade2 = new javax.swing.JButton();
+        btnGerar = new javax.swing.JButton();
+        btnGerar1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        jMenu9 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         jPasswordField1.setText("jPasswordField1");
 
@@ -67,33 +76,69 @@ public class TelaInicial extends javax.swing.JFrame {
         jMenu4.setText("Edit");
         jMenuBar2.add(jMenu4);
 
+        jMenu5.setText("File");
+        jMenuBar3.add(jMenu5);
+
+        jMenu6.setText("Edit");
+        jMenuBar3.add(jMenu6);
+
+        jMenu7.setText("File");
+        jMenuBar4.add(jMenu7);
+
+        jMenu8.setText("Edit");
+        jMenuBar4.add(jMenu8);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
+        jLabel5.setText(" Aquila Functional Test Automation Tool!");
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/oie_transparent (1).png"))); // NOI18N
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel2.setText("Feature Input  File:");
 
         btnSelecionarFuncionalidade.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnSelecionarFuncionalidade.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/searching-magnifying-glass.png"))); // NOI18N
-        btnSelecionarFuncionalidade.setText("Find");
         btnSelecionarFuncionalidade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSelecionarFuncionalidadeActionPerformed(evt);
             }
         });
 
-        jLabel2.setText("Feature Input  File:");
+        btnSelecionarFuncionalidade1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnSelecionarFuncionalidade1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/searching-magnifying-glass.png"))); // NOI18N
+        btnSelecionarFuncionalidade1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSelecionarFuncionalidade1ActionPerformed(evt);
+            }
+        });
 
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel4.setText("Script Output File:");
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setText("Auxiliar Library Name:");
 
-        txtBiblioteca.setText("auxiliar.java");
+        txtBiblioteca.setEnabled(false);
         txtBiblioteca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtBibliotecaActionPerformed(evt);
             }
         });
 
-        jLabel4.setText("Script Output File:");
+        btnSelecionarFuncionalidade2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnSelecionarFuncionalidade2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/searching-magnifying-glass.png"))); // NOI18N
+        btnSelecionarFuncionalidade2.setEnabled(false);
+        btnSelecionarFuncionalidade2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSelecionarFuncionalidade2ActionPerformed(evt);
+            }
+        });
 
         btnGerar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnGerar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/confirm.png"))); // NOI18N
-        btnGerar.setText("Confirm Generation");
+        btnGerar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/vcsnormal_93488.png"))); // NOI18N
+        btnGerar.setText("Generate");
         btnGerar.setActionCommand("Gerar Script");
         btnGerar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -101,24 +146,13 @@ public class TelaInicial extends javax.swing.JFrame {
             }
         });
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
-        jLabel5.setText("Welcome to Aquila Functional Test Automation Tool!");
-
-        btnSelecionarFuncionalidade1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnSelecionarFuncionalidade1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/searching-magnifying-glass.png"))); // NOI18N
-        btnSelecionarFuncionalidade1.setText("Find");
-        btnSelecionarFuncionalidade1.addActionListener(new java.awt.event.ActionListener() {
+        btnGerar1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnGerar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/delete_icon-icons.com_74434.png"))); // NOI18N
+        btnGerar1.setText("Cancel");
+        btnGerar1.setActionCommand("Gerar Script");
+        btnGerar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSelecionarFuncionalidade1ActionPerformed(evt);
-            }
-        });
-
-        btnSelecionarFuncionalidade2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnSelecionarFuncionalidade2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/searching-magnifying-glass.png"))); // NOI18N
-        btnSelecionarFuncionalidade2.setText("Find");
-        btnSelecionarFuncionalidade2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSelecionarFuncionalidade2ActionPerformed(evt);
+                btnGerar1ActionPerformed(evt);
             }
         });
 
@@ -127,48 +161,57 @@ public class TelaInicial extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(25, 25, 25)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 496, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 639, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(17, 17, 17)
+                                .addGap(7, 7, 7)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2)
                                     .addComponent(jLabel4))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtScript, javax.swing.GroupLayout.DEFAULT_SIZE, 437, Short.MAX_VALUE)
+                                    .addComponent(txtScript)
                                     .addComponent(txtFuncionalidade)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txtBiblioteca)))
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnSelecionarFuncionalidade2)
                             .addComponent(btnSelecionarFuncionalidade)
-                            .addComponent(btnSelecionarFuncionalidade1)
-                            .addComponent(btnSelecionarFuncionalidade2))
-                        .addGap(22, 22, 22)))
-                .addContainerGap(6, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(246, 246, 246)
-                .addComponent(btnGerar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(btnSelecionarFuncionalidade1)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnGerar1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnGerar)))
+                .addGap(24, 24, 24))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(jLabel5)
-                .addGap(43, 43, 43)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtFuncionalidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSelecionarFuncionalidade))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(jLabel5))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnSelecionarFuncionalidade, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2)
+                        .addComponent(txtFuncionalidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(15, 15, 15)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -182,25 +225,38 @@ public class TelaInicial extends javax.swing.JFrame {
                         .addComponent(txtBiblioteca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btnSelecionarFuncionalidade2))
                 .addGap(18, 18, 18)
-                .addComponent(btnGerar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnGerar1)
+                    .addComponent(btnGerar)))
         );
 
-        jMenu1.setText("Opções");
+        jMenuBar1.add(jMenu2);
 
-        jMenuItem1.setText("Sobre");
+        jMenu9.setText("Feature");
+
+        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/new-file_40454.png"))); // NOI18N
+        jMenuItem3.setText("Novo");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu9.add(jMenuItem3);
+
+        jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/open-file-icon - Copia.png"))); // NOI18N
+        jMenuItem4.setText("Abrir");
+        jMenu9.add(jMenuItem4);
+
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/edit-validated_40458.png"))); // NOI18N
+        jMenuItem1.setText("Novo - A partir de Modelo");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        jMenu9.add(jMenuItem1);
 
-        jMenuItem2.setText("Ajuda");
-        jMenu1.add(jMenuItem2);
-
-        jMenuBar1.add(jMenu1);
-        jMenuBar1.add(jMenu2);
+        jMenuBar1.add(jMenu9);
 
         setJMenuBar(jMenuBar1);
 
@@ -209,16 +265,14 @@ public class TelaInicial extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 10, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(110, 110, 110))
+                .addGap(0, 11, Short.MAX_VALUE))
         );
 
         pack();
@@ -227,19 +281,28 @@ public class TelaInicial extends javax.swing.JFrame {
     private void btnSelecionarFuncionalidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelecionarFuncionalidadeActionPerformed
         JFileChooser seleciona = new JFileChooser();
         if (seleciona.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
-            File arquivo = seleciona.getSelectedFile();
-            JOptionPane.showMessageDialog(this, "Nome: " + arquivo.getName() + "\nLocal: " + arquivo.getPath());
+            File arquivo = seleciona.getSelectedFile();     
+//            JOptionPane.showMessageDialog(null, seleciona.getSelectedFile().getName());
             txtFuncionalidade.setText(arquivo.getAbsolutePath());
+            
+            String caminhoFuncionalidade = arquivo.getAbsolutePath();
+            String nomeFuncionalidade = seleciona.getSelectedFile().getName();
+         
+            
+             String palavra = caminhoFuncionalidade.substring( 0, (caminhoFuncionalidade.length() - nomeFuncionalidade.length()));
+              
+            txtBiblioteca.setText(palavra+"AquilaBib.java");
         }
     }//GEN-LAST:event_btnSelecionarFuncionalidadeActionPerformed
 
     private void btnGerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarActionPerformed
 
-        String par[] = new String[3];
+        String par[] = new String[4];
 
         par[0] = "-i" + txtFuncionalidade.getText();
         par[1] = "-o" + txtScript.getText() + ".java";
         par[2] = "-cb" + palavra + txtBiblioteca.getText();
+        par[3] = txtBiblioteca.getText();
 
         App.principal(par);
 
@@ -260,10 +323,6 @@ public class TelaInicial extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnSelecionarFuncionalidade1ActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
     private void txtBibliotecaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBibliotecaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtBibliotecaActionPerformed
@@ -279,6 +338,27 @@ public class TelaInicial extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_btnSelecionarFuncionalidade2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+        
+        EditorNovo editor  = new EditorNovo();
+        editor.setVisible(true);
+        TelaInicial.this.setVisible(false);
+        
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void btnGerar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnGerar1ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+         EditorNovo editor  = new EditorNovo();
+        editor.setVisible(true);
+        TelaInicial.this.setVisible(false);
+        
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -317,21 +397,30 @@ public class TelaInicial extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGerar;
+    private javax.swing.JButton btnGerar1;
     private javax.swing.JButton btnSelecionarFuncionalidade;
     private javax.swing.JButton btnSelecionarFuncionalidade1;
     private javax.swing.JButton btnSelecionarFuncionalidade2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenu jMenu7;
+    private javax.swing.JMenu jMenu8;
+    private javax.swing.JMenu jMenu9;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
+    private javax.swing.JMenuBar jMenuBar3;
+    private javax.swing.JMenuBar jMenuBar4;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JTextField txtBiblioteca;

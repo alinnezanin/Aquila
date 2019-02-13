@@ -14,12 +14,12 @@ public class Link implements ComandosAquila {
 
 	@Override
 	public boolean verificar(PickleStep ps) {
-		return ps.getText().matches(".*link\\[.*\\]$");
+		return ps.getText().matches(".*click-link\\[.*\\]$");
 	}
 
 	@Override
 	public Tupla<FSM, State> processar(PickleStep ps) {
-		Pattern p = Pattern.compile(".*link\\[(.*)\\]$");
+		Pattern p = Pattern.compile(".*click-link\\[(.*)\\]$");
 		Matcher m = p.matcher(ps.getText());
 		String input = "";
 		if(!m.find())

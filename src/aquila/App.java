@@ -19,6 +19,8 @@ import gherkin.ast.GherkinDocument;
 import gherkin.pickles.Compiler;
 import gherkin.pickles.Pickle;
 import gherkin.pickles.PickleStep;
+import java.util.Calendar;
+import java.util.TimeZone;
 import javax.swing.JOptionPane;
 
 public class App {
@@ -131,8 +133,19 @@ public class App {
         //System.out.println(Contexto.getContext().getLinguagem().gerarCodigo(sequencias));
         //System.out.println(Contexto.getContext().getLinguagem().gerarBiblioteca());
         salvar(Contexto.getContext().getArqSaida(), Contexto.getContext().getLinguagem().gerarCodigo(sequencias));
+
         if (Contexto.getContext().isGerarBib()) {
-            salvar("AquilaBib.java", Contexto.getContext().getLinguagem().gerarBiblioteca());
+            Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("Brazil/East"));
+            int ano = calendar.get(Calendar.YEAR);
+            int mes = calendar.get(Calendar.MONTH); // O mês vai de 0 a 11.
+            int semana = calendar.get(Calendar.WEEK_OF_MONTH);
+            int dia = calendar.get(Calendar.DAY_OF_MONTH);
+            int hora = calendar.get(Calendar.HOUR_OF_DAY);
+            int minuto = calendar.get(Calendar.MINUTE);
+            int segundo = calendar.get(Calendar.SECOND);
+
+            salvar(par[3], Contexto.getContext().getLinguagem().gerarBiblioteca());
+            JOptionPane.showMessageDialog(null, "Gerado arquivo auxiliar, verifique em: " + par[3]);
         }
 
         JOptionPane.showMessageDialog(null, "Gerado com Sucesso");

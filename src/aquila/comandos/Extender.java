@@ -24,7 +24,7 @@ public class Extender implements ComandosAquila {
 		
 		if(!matcher.find())
 		{
-			System.err.println("FSM não encontrada: " + ps.getText());
+			System.err.println("FSM nao encontrada: " + ps.getText());
 		}
 		nomeFSM = matcher.group(1);
 		Tupla<FSM, State> resposta = Contexto.getContext().getFSM(nomeFSM);
