@@ -145,7 +145,6 @@ public class App {
             int segundo = calendar.get(Calendar.SECOND);
 
             salvar(par[3], Contexto.getContext().getLinguagem().gerarBiblioteca());
-            JOptionPane.showMessageDialog(null, "Gerado arquivo auxiliar, verifique em: " + par[3]);
         }
 
         JOptionPane.showMessageDialog(null, "Gerado com Sucesso");
