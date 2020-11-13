@@ -26,4 +26,5 @@ Java Development Kit 11
 ### More information about Aqula will be available soon
 
 
+##Developed by Henry Cabral Nunes, Aline Zanin, Avelino Francisco Zorzo
 
